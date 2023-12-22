@@ -1,10 +1,10 @@
-name: 'Application API deployment (users)'
+name: 'Application API deployment (tasks)'
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'users/**'
+      - 'tasks/**'
   workflow_dispatch:
     inputs:
       logLevel:
@@ -26,10 +26,10 @@ jobs:
         with:
           node-version: 16.x
       - name: Install dependencies
-        working-directory: ./users
+        working-directory: ./tasks
         run: npm install
       - name: Run tests
-        working-directory: ./users
+        working-directory: ./tasks
         run: npm test
 
   deploy_to_render:
@@ -40,9 +40,9 @@ jobs:
       - name: Deploy API to Render
         if: github.ref == 'refs/heads/main'
         env:
-          USERS_DEPLOY_HOOK: ${{ secrets.USERS_DEPLOY_HOOK }}
+          TASKS_DEPLOY_HOOK: ${{ secrets.TASKS_DEPLOY_HOOK }}
         run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST $USERS_DEPLOY_HOOK)
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST $TASKS_DEPLOY_HOOK)
           if [ $response -eq 200 ]
           then
               echo "Deployed successfully"
