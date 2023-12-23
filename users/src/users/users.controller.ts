@@ -17,12 +17,13 @@ export class UsersController {
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
+  
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
-  
+
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
