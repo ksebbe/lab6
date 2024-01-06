@@ -11,8 +11,8 @@ export class ProvidersController {
   async findAll() {
     return this.usersService.findAll();
   }
-  
 
+  
 
   @Post()
   async create(@Body() createProviderDto: CreateAndUpdateProviderDto) {
