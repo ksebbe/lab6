@@ -11,7 +11,6 @@ export class TasksController {
     return this.tasksService.findAll();
   }
 
-  
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.tasksService.findOne(id);
